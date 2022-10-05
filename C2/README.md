@@ -1,6 +1,6 @@
 # C2: Matrix Operations
 
-In the file `matrix.py` is the starter code to implementing two matrix operations: the 2D coordinates of the largest number and the convolution operation. 
+In the file `matrix.py` is the starter code to implementing two matrix operations: the 2D coordinates of the largest number and the convolution operation.
 
 For the first task, you must return the row, column index of the largest number in a 2D array. You implementation should be as simple as possible.
 

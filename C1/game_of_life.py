@@ -7,21 +7,29 @@ class Game:
         # We use a predetermined seed to evaluate correct implementation
         if seed:
             np.random.seed(seed)
-        
+
         # Initialize the board with a random series of 1s and 0s
         self._board = np.random.randint(0,2,size)
         self._gen = 0
         self._max_gen = max_gen
 
-    
     def update(self):
         board = np.copy(self._board)
-        
+
         ''' Insert your code for updating the board based on the rules below '''
+        for i in range(8):
+          for j in range(8):
+            total = int((board[i, (j-1)%8] + board[i, (j+1)%8] + board[(i-1)%8, j] + board[(i+1)%8, j] + board[(i-1)%8, (j-1)%8] + board[(i-1)%8, (j+1)%8] + board[(i+1)%8, (j-1)%8] + board[(i+1)%8, (j+1)%8])/255)
+        print(total)
+        if board[i,j] == 1:
+          if (total < 2) or (total > 3):
+            newgrid[i, j] = 0
+        else:
+          if total == 3:
+            newgrid[i, j] = 1
 
+        board[:] = newgrid[:]
 
-
-        
         self._board = board
 
 
@@ -29,7 +37,7 @@ class Game:
         while self._gen < self._max_gen:
             # Start the generation by drawing the current board
             self.draw()
-            
+
             # Next we update each of the cells according to the rules 
             self.update()
 
@@ -44,7 +52,7 @@ class Game:
         print(f'Average update time: {(time.time()-start)/gens*1000} ms')
 
     def draw(self):
-        for row in self._board:   
+        for row in self._board:
             # Print a full block for each alive cell and an empty one for dead cells bounded by |
             print('|'.join(['▇' if c else ' ' for c in row]))
 

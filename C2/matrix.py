@@ -8,12 +8,13 @@ class MatrixOps:
 
         self._matrix = np.random.randint(0,10, size=(10,10))
         self._kernel = np.random.randint(-2,2, size=(3,3))
-    
-    def largest_index(self, matrix):
-        ''' Make this function return a tuple of the (row, col) 
-            index of the largest value in the matrix '''
 
-        return (0,0)
+    def largest_index(self, matrix):
+        ''' Make this function return a tuple of the (row, col)
+            index of the largest value in the matrix '''
+        max_xy = np.where(matrix == matrix.max())
+        result = zip(max_xy[0], max_xy[1])
+        return max_xy
 
     def convolve(self, kernel, matrix):
         ''' Make this function return the result of a 2D convolution '''
@@ -22,7 +23,6 @@ class MatrixOps:
 
     def run(self):
         print("Largest index is at ", self.largest_index(self._matrix))
-        
         print("Result of convolution:")
         print(self.convolve(self._kernel, self._matrix))
 
@@ -37,4 +37,4 @@ if __name__ == "__main__":
     print("and kernel ")
     print(m._kernel)
 
-    m.run() 
+    m.run()
